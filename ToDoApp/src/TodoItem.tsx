@@ -1,9 +1,19 @@
-export default function TodoItem({texto, completed}: {texto: string, completed?: boolean}) {
-    return (
-        <li>
-            <span>V</span>
-            <p>{texto}</p>
-            <span>X</span>
-        </li>
-    )
+import './TodoItem.css';
+
+function TodoItem(props: { completed: boolean; text: string }) {
+  return (
+    <li className="TodoItem">
+      <span className={`Icon Icon-check ${props.completed && "Icon-check--active"}`}>
+        V
+      </span>
+      <p className={`TodoItem-p ${props.completed && "TodoItem-p--complete"}`}>
+        {props.text}
+      </p>
+      <span className="Icon Icon-delete">
+        X
+      </span>
+    </li>
+  );
 }
+
+export { TodoItem };

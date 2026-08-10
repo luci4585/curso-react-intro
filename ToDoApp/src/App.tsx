@@ -5,11 +5,18 @@ import heroImg from './assets/hero.png'
 import './App.css'
 import TodoHeader from './TodoHeader'
 import TodoItem from './TodoItem'
-import TodoCount from './TodoCount'
-import TodoSearch from './TodoSearch'
-import TodoCreateButton from './TodoCreateButton'
+import { TodoCount } from './TodoCount'
+import { TodoSearch } from './TodoSearch'
+import { TodoCreateButton } from './TodoCreateButton'
 import TodoList from './TodoList'
 
+const defaultTodos = [
+  { text: 'Cortar cebolla', completed: true },
+  { text: 'Tomar el Curso de Intro a React.js', completed: false },
+  { text: 'Llorar con la Llorona', completed: false },
+  { text: 'LALALALALA', completed: false },
+  { text: 'Usar estados derivados', completed: true },
+];
 
 function AppOriginal() {
   const [count, setCount] = useState(0)
@@ -126,15 +133,42 @@ function AppOriginal() {
   )
 }
 
-export default function App() {
+function App() {
+  const [todos, setTodos] =useState(defaultTodos);
+  const [searchValue, setSearchValue] = useState('');
+
+  const completedTodos = todos.filter(
+    todo => !!todo.completed
+  ).length;
+  const totalTodos = todos.length;
+
+  console.log('Los usuarios buscan todos de ' + searchValue);
+  
   return (
     <>
-    {console.log('Renderizando App')}
-      <TodoHeader />
-      <TodoCount completadas={3} total={5} />
-      <TodoSearch />
+      <TodoCount
+        completed={completedTodos}
+        total={totalTodos} 
+      />
+      <TodoSearch
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
+
       <TodoList />
+      <ul>
+        {defaultTodos.map(todo => (
+          <TodoItem
+            key={todo.text}
+            text={todo.text}
+            completed={todo.completed}
+          />
+        ))}
+      </ul>
+      
       <TodoCreateButton />
     </>
-  )
+  );
 }
+
+export default App;

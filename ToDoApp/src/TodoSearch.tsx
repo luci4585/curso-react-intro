@@ -1,14 +1,23 @@
-import {useState} from 'react';
+import React from 'react';
+import './TodoSearch.css';
 
-export default function TodoSearch () {
-    const [searchValue, setSearchValue] = useState('');
-    return(
-        <>
-            <label htmlFor="search">Buscar tarea:</label>
-            <input id="search" placeholder="Buscar tarea..." value={searchValue} 
-            onChange={(event) => setSearchValue(event.target.value)}
-            />
-            <p>Valor de busqueda: {searchValue}</p>
-        </>
-    )
+function TodoSearch({
+  searchValue,
+  setSearchValue,
+}: {
+  searchValue: string;
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
+}) {
+  return (
+    <input
+      placeholder="Cortar cebolla"
+      className="TodoSearch"
+      value={searchValue}
+      onChange={(event) => {
+        setSearchValue(event.target.value);
+      }}
+    />
+  );
 }
+
+export { TodoSearch };
