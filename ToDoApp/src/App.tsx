@@ -4,19 +4,12 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 import TodoHeader from './TodoHeader'
-import TodoItem from './TodoItem'
-import { TodoCount } from './TodoCount'
-import { TodoSearch } from './TodoSearch'
-import { TodoCreateButton } from './TodoCreateButton'
+import TodoItem  from './TodoItem'
+import TodoCounter from './TodoCounter'
+import TodoSearch from './TodoSearch'
+import CreateTodoButton from './CreateTodoButton'
 import TodoList from './TodoList'
 
-const defaultTodos = [
-  { text: 'Cortar cebolla', completed: true },
-  { text: 'Tomar el Curso de Intro a React.js', completed: false },
-  { text: 'Llorar con la Llorona', completed: false },
-  { text: 'LALALALALA', completed: false },
-  { text: 'Usar estados derivados', completed: true },
-];
 
 function AppOriginal() {
   const [count, setCount] = useState(0)
@@ -133,42 +126,39 @@ function AppOriginal() {
   )
 }
 
-function App() {
-  const [todos, setTodos] =useState(defaultTodos);
-  const [searchValue, setSearchValue] = useState('');
+export default function App() {
+  const listaTareas = [
+    { text: 'Cambiar la garrafa', completed: false },
+    { text: 'Ir al padel', completed: false },
+    { text: 'actualizar el CV', completed: false },
+  ]
+  const[tareasApp, setTareasApp] = useState(listaTareas)
+  const [textoBusqueda, setTextoBusqueda] = useState('')
+  //estados derivados
+  const completed = tareasApp.filter(tarea => tarea.completed).length
+  const total = tareasApp.length
+  const tareasFiltradas = tareasApp.filter(
+    tarea => tarea.text.toLowerCase().includes(textoBusqueda.toLowerCase()))
 
-  const completedTodos = todos.filter(
-    todo => !!todo.completed
-  ).length;
-  const totalTodos = todos.length;
+    const completeTodo = (text:string) => {
+    const newTodos = [...tareasApp];
+    const todoIndex = newTodos.findIndex((todo) => todo.text === text );
+    newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
+    setTareasApp(newTodos); };
 
-  console.log('Los usuarios buscan todos de ' + searchValue);
+    const deleteTodo = (text:string) => {
+    const newTodos = [...tareasApp];
+    const todoIndex = newTodos.findIndex((todo) => todo.text === text );
+    newTodos.splice(todoIndex, 1);
+    setTareasApp(newTodos); }
   
   return (
     <>
-      <TodoCount
-        completed={completedTodos}
-        total={totalTodos} 
-      />
-      <TodoSearch
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-      />
-
-      <TodoList />
-      <ul>
-        {defaultTodos.map(todo => (
-          <TodoItem
-            key={todo.text}
-            text={todo.text}
-            completed={todo.completed}
-          />
-        ))}
-      </ul>
-      
-      <TodoCreateButton />
+      <TodoHeader />
+      <TodoCounter completed={completed} total={total} />
+      <TodoSearch textoBusqueda={textoBusqueda} setTextoBusqueda={setTextoBusqueda} />
+      <TodoList tareas={tareasFiltradas} completeTodo={completeTodo} deleteTodo={deleteTodo} />
+      <CreateTodoButton />
     </>
-  );
+  )
 }
-
-export default App;

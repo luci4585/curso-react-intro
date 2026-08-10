@@ -1,23 +1,18 @@
 import React from 'react';
+import { useState } from 'react';
 import './TodoSearch.css';
 
-function TodoSearch({
-  searchValue,
-  setSearchValue,
-}: {
-  searchValue: string;
-  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
-}) {
+export default function TodoSearch({ textoBusqueda, setTextoBusqueda }: 
+  { textoBusqueda: string; setTextoBusqueda: (texto: string) => void }) {
+    
+
   return (
     <input
       placeholder="Cortar cebolla"
       className="TodoSearch"
-      value={searchValue}
-      onChange={(event) => {
-        setSearchValue(event.target.value);
-      }}
+      value={textoBusqueda}
+        onChange={(event) => setTextoBusqueda(event.target.value)
+    }
     />
   );
 }
-
-export { TodoSearch };

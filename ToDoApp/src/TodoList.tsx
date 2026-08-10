@@ -1,18 +1,22 @@
-import TodoItem from "./TodoItem"
+import TodoItem from './TodoItem'
 
-export default function TodoList () {
-        const listaTareas = [
-            { text: 'Cambiar la garrafa', completed:false},
-            { text: 'Ir al padel', completed:false},
-            { text: 'actualizar el CV', completed:false}
-        ]
+interface Tarea {
+    text: string
+    completed: boolean
+}
+
+export default function TodoList ({ tareas, completeTodo, deleteTodo }: 
+    { tareas: { text: string; completed: boolean }[], 
+    completeTodo: (text: string) => void, deleteTodo: (text: string) => void }) {        
     return(
         <>
-            {listaTareas.map(tarea=> (
+            {tareas.map(tarea=> (
                 <TodoItem 
                     key={tarea.text} 
                     texto={tarea.text}
-                    completed={tarea.completed}
+                    completado={tarea.completed}
+                    onCompleteTodo={(text) => completeTodo(text)}
+                    onDeleteTodo={(text) => deleteTodo(text)}
                 />))
             }
         </>
