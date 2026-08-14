@@ -1,6 +1,16 @@
 import './TodoItem.css';
 
-export default function TodoItem({texto, completado, onCompleteTodo, onDeleteTodo}: { texto: string; completado: boolean; onCompleteTodo: (text: string) => void; onDeleteTodo: (text: string) => void }) {
+export default function TodoItem({
+  texto, 
+  completado, 
+  onCompleteTodo, 
+  onDeleteTodo}: 
+  { 
+    texto: string; 
+    completado: boolean; 
+    onCompleteTodo: (text: string) => void; 
+    onDeleteTodo: (text: string) => void }) 
+  {
   return (
     <li className="TodoItem">
       <span className={`Icon Icon-check ${completado ? "Icon-check--active" : ""}`}

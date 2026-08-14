@@ -1,4 +1,4 @@
-import isp20 from './assets/isp20.png'
+import isp20 from '../../assets/isp20.png'
 
 export default function TodoHeader() {
     const imgStyle = {margin: '0 auto', display: 'block', width: '200px', height: '200px'}

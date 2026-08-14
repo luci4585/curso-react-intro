@@ -1,14 +1,14 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import reactLogo from '../../assets/react.svg'
+import viteLogo from '../../assets/vite.svg'
+import heroImg from '../../assets/hero.png'
 import './App.css'
-import TodoHeader from './TodoHeader'
-import TodoItem  from './TodoItem'
-import TodoCounter from './TodoCounter'
-import TodoSearch from './TodoSearch'
-import CreateTodoButton from './CreateTodoButton'
-import TodoList from './TodoList'
+import TodoHeader from '../TodoHeader/TodoHeader'
+import TodoItem  from '../TodoItem/TodoItem'
+import TodoCounter from '../TodoCounter/TodoCounter'
+import TodoSearch from '../TodoSearch/TodoSearch'
+import CreateTodoButton from '../CreateTodoButton/CreateTodoButton'
+import TodoList from '../TodoList/TodoList'
 
 
 function AppOriginal() {
@@ -157,7 +157,16 @@ export default function App() {
       <TodoHeader />
       <TodoCounter completed={completed} total={total} />
       <TodoSearch textoBusqueda={textoBusqueda} setTextoBusqueda={setTextoBusqueda} />
-      <TodoList tareas={tareasFiltradas} completeTodo={completeTodo} deleteTodo={deleteTodo} />
+      <TodoList>{tareasFiltradas.map(tarea=> (
+                <TodoItem 
+                    key={tarea.text}
+                    texto={tarea.text}
+                    completado={tarea.completed}
+                    onCompleteTodo={completeTodo}
+                    onDeleteTodo={deleteTodo}
+                />
+            ))}
+      </TodoList>
       <CreateTodoButton />
     </>
   )
