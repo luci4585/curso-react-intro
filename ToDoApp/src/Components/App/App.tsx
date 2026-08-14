@@ -9,6 +9,8 @@ import TodoCounter from '../TodoCounter/TodoCounter'
 import TodoSearch from '../TodoSearch/TodoSearch'
 import CreateTodoButton from '../CreateTodoButton/CreateTodoButton'
 import TodoList from '../TodoList/TodoList'
+import React from 'react'
+import { TodoContext } from '../TodoContext/TodoContext'
 
 
 function AppOriginal() {
@@ -127,41 +129,22 @@ function AppOriginal() {
 }
 
 export default function App() {
-  const listaTareas = [
-    { text: 'Cambiar la garrafa', completed: false },
-    { text: 'Ir al padel', completed: false },
-    { text: 'actualizar el CV', completed: false },
-  ]
-  const[tareasApp, setTareasApp] = useState(listaTareas)
-  const [textoBusqueda, setTextoBusqueda] = useState('')
-  //estados derivados
-  const completed = tareasApp.filter(tarea => tarea.completed).length
-  const total = tareasApp.length
-  const tareasFiltradas = tareasApp.filter(
-    tarea => tarea.text.toLowerCase().includes(textoBusqueda.toLowerCase()))
+  const 
+  {tareasFiltradas, 
+ 
+    textoBusqueda, 
+    setTextoBusqueda,  = React.useContext(TodoContext)!;
 
-    const completeTodo = (text:string) => {
-    const newTodos = [...tareasApp];
-    const todoIndex = newTodos.findIndex((todo) => todo.text === text );
-    newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
-    setTareasApp(newTodos); };
-
-    const deleteTodo = (text:string) => {
-    const newTodos = [...tareasApp];
-    const todoIndex = newTodos.findIndex((todo) => todo.text === text );
-    newTodos.splice(todoIndex, 1);
-    setTareasApp(newTodos); }
-  
   return (
     <>
       <TodoHeader />
-      <TodoCounter completed={completed} total={total} />
+      <TodoCounter completed={completadas} total={total} />
       <TodoSearch textoBusqueda={textoBusqueda} setTextoBusqueda={setTextoBusqueda} />
       <TodoList>{tareasFiltradas.map(tarea=> (
                 <TodoItem 
-                    key={tarea.text}
-                    texto={tarea.text}
-                    completado={tarea.completed}
+                    key={tarea.texto}
+                    texto={tarea.texto}
+                    completado={tarea.completado}
                     onCompleteTodo={completeTodo}
                     onDeleteTodo={deleteTodo}
                 />
