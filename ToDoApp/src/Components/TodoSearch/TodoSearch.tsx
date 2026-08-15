@@ -1,11 +1,9 @@
 import React from 'react';
-import { useState } from 'react';
+import { TodoContext } from '../TodoContext/TodoContext';
 import './TodoSearch.css';
 
-export default function TodoSearch({ textoBusqueda, setTextoBusqueda }: 
-  { textoBusqueda: string; setTextoBusqueda: (texto: string) => void }) {
-    
-
+export default function TodoSearch() {
+  const {textoBusqueda, setTextoBusqueda} = React.useContext(TodoContext)!;
   return (
     <input
       placeholder="Cortar cebolla"

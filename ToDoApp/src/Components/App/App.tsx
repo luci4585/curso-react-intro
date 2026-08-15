@@ -129,17 +129,12 @@ function AppOriginal() {
 }
 
 export default function App() {
-  const 
-  {tareasFiltradas, 
- 
-    textoBusqueda, 
-    setTextoBusqueda,  = React.useContext(TodoContext)!;
-
+const {tareasFiltradas, completeTodo, deleteTodo} = React.useContext(TodoContext)!;
   return (
     <>
       <TodoHeader />
-      <TodoCounter completed={completadas} total={total} />
-      <TodoSearch textoBusqueda={textoBusqueda} setTextoBusqueda={setTextoBusqueda} />
+      <TodoCounter />
+      <TodoSearch />
       <TodoList>{tareasFiltradas.map(tarea=> (
                 <TodoItem 
                     key={tarea.texto}
