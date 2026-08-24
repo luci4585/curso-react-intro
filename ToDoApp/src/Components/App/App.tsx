@@ -11,6 +11,8 @@ import CreateTodoButton from '../CreateTodoButton/CreateTodoButton'
 import TodoList from '../TodoList/TodoList'
 import React from 'react'
 import { TodoContext } from '../TodoContext/TodoContext'
+import TodoAlumno from '../TodoAlumno/TodoAlumno'
+
 
 
 function AppOriginal() {
@@ -145,6 +147,7 @@ const {tareasFiltradas, completeTodo, deleteTodo} = React.useContext(TodoContext
                 />
             ))}
       </TodoList>
+      <TodoAlumno />
       <CreateTodoButton />
     </>
   )
