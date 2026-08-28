@@ -1,5 +1,16 @@
  import DatosAlumno from '../DatosAlumno/DatosAlumno'
  import TarjetaProducto from '../TarjetaProducto/TarjetaProducto'
+ import AccionesAlumno from '../AccionesAlumno/AccionesAlumno'
+
+     function verAlumno() {
+        alert('Ver Alumno');
+    }
+    function editarAlumno() {
+        alert('Editar Alumno');
+    }
+    function eliminarAlumno() {
+        alert('Eliminar Alumno');
+    }
 
 function AppEjercicio() {
   return (
@@ -14,6 +25,7 @@ function AppEjercicio() {
       <TarjetaProducto />
       <TarjetaProducto />
       <Materias />
+      <AccionesAlumno verAlumno={verAlumno} editarAlumno={editarAlumno} eliminarAlumno={eliminarAlumno} />
       <PieDePagina />
     </>
   )

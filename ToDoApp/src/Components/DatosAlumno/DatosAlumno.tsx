@@ -11,6 +11,10 @@ export default function DatosAlumno({alumno, curso, año, enlace}: {alumno: Stri
     <img src={gato} style={imgStyle} className="gato" />
     <h3>La suma de 2 + 2 es: {2 + 2}</h3>
     <h3>Enlace de la imagen: <a href={enlace} target="_blank" rel="noopener noreferrer">Ver imagen</a></h3>
+    <button onClick={(evento) => {
+    console.log('Botón clickeado');
+    console.log(evento);
+    }}>Haz clic aquí</button>
     </>
   )
 }
