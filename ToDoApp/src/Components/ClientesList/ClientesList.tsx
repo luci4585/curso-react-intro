@@ -1,4 +1,5 @@
 import useClientesApi from "../../Hooks/useClientesApi";
+import Cliente from "../Cliente/Cliente";
 
 export default function ClientesList() {
     const { clientes } = useClientesApi();
@@ -9,7 +10,7 @@ export default function ClientesList() {
             <span className="fuente">Lista de Clientes</span>
             <ul>
                 {clientes.map((cliente) => (
-                    <li key={cliente.id}>{cliente.firstname} {cliente.lastname}</li>
+                    <Cliente key={cliente.id} cliente={cliente} />
                 ))}
             </ul>
         </div>

@@ -1,22 +1,17 @@
 import { useState, useEffect, useCallback } from "react";
+import type ICliente from "../Interfaces/ICliente";
 
 const URL_BASE =
   "https://api-inventario-ale-fcdhb0brcahmb4dy.westus3-01.azurewebsites.net/api/Clientes";
 
-export interface Cliente {
-  id: number;
-  firstname: string;
-  lastname: string;
-  // Agregá aquí las demás propiedades reales de tu entidad Cliente.
-}
 
 export default function useClientesApi() {
-  const [clientes, setClientes] = useState<Cliente[]>([]);
+  const [clientes, setClientes] = useState<ICliente[]>([]);
   const [cargando, setCargando] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const obtenerClientes = useCallback(async (): Promise<
-    Cliente[] | undefined
+    ICliente[] | undefined
   > => {
     setCargando(true);
     setError(null);
@@ -28,7 +23,7 @@ export default function useClientesApi() {
         throw new Error("Error al obtener los clientes");
       }
 
-      const datos: Cliente[] = await respuesta.json();
+      const datos: ICliente[] = await respuesta.json();
 
       setClientes(datos);
 
@@ -45,7 +40,7 @@ export default function useClientesApi() {
   }, []);
 
   const obtenerClientePorId = useCallback(
-    async (id: number): Promise<Cliente | undefined> => {
+    async (id: number): Promise<ICliente | undefined> => {
       setCargando(true);
       setError(null);
 
@@ -56,7 +51,7 @@ export default function useClientesApi() {
           throw new Error("Error al obtener el cliente");
         }
 
-        const cliente: Cliente = await respuesta.json();
+        const cliente: ICliente = await respuesta.json();
 
         return cliente;
       } catch (err: unknown) {
@@ -73,7 +68,7 @@ export default function useClientesApi() {
   );
 
   const crearCliente = useCallback(
-    async (cliente: Omit<Cliente, "id">): Promise<Cliente | undefined> => {
+    async (cliente: Omit<ICliente, "id">): Promise<ICliente | undefined> => {
       setCargando(true);
       setError(null);
 
@@ -90,7 +85,7 @@ export default function useClientesApi() {
           throw new Error("Error al crear el cliente");
         }
 
-        const nuevoCliente: Cliente = await respuesta.json();
+        const nuevoCliente: ICliente = await respuesta.json();
 
         setClientes((clientesActuales) => [
           ...clientesActuales,
@@ -114,7 +109,7 @@ export default function useClientesApi() {
   const actualizarCliente = useCallback(
     async (
       id: number,
-      cliente: Partial<Omit<Cliente, "id">>
+      cliente: Partial<Omit<ICliente, "id">>
     ): Promise<void> => {
       setCargando(true);
       setError(null);
