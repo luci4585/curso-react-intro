@@ -1,6 +1,7 @@
  import DatosAlumno from '../DatosAlumno/DatosAlumno'
  import TarjetaProducto from '../TarjetaProducto/TarjetaProducto'
  import AccionesAlumno from '../AccionesAlumno/AccionesAlumno'
+ import EstadoNumero from '../EstadoNumero/EstadoNumero'
 
      function verAlumno() {
         alert('Ver Alumno');
@@ -23,7 +24,10 @@ function AppEjercicio() {
         enlace="https://example.com/image.jpg" />
       <TarjetaProducto />
       <TarjetaProducto />
-      <TarjetaProducto />
+      <EstadoNumero numero={0} />
+      <EstadoNumero numero={10} />
+      <EstadoNumero numero={-5} />
+      <EstadoNumero numero={0} />
       <Materias />
       <AccionesAlumno verAlumno={verAlumno} editarAlumno={editarAlumno} eliminarAlumno={eliminarAlumno} />
       <PieDePagina />
