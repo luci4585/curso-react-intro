@@ -18,7 +18,10 @@ const configurarDialogEliminar: SweetAlertOptions = {
     confirmButtonText: 'Sí, eliminarlo!'
   };
 
-export default function Cliente({ cliente, eliminarCliente }: { cliente: ICliente; eliminarCliente: (id: number) => void  }) {
+export default function Cliente({ cliente, eliminarCliente, setOpenModal, setClienteSeleccionado }: 
+    { cliente: ICliente; eliminarCliente: (id: number) => void; 
+        setOpenModal: (open: boolean) => void;
+        setClienteSeleccionado: (cliente: ICliente | null) => void }) {
     const onEliminar = (id: number) => {
         Swal.fire(configurarDialogEliminar).then((result) => {
             if (result.isConfirmed) {
@@ -41,7 +44,12 @@ export default function Cliente({ cliente, eliminarCliente }: { cliente: IClient
                 </CardContent>
 
                 <CardActions sx={{ justifyContent: "center" }}>
-                    <Button variant="contained">Editar</Button>
+                    <Button variant="contained" onClick={() => {
+                        setClienteSeleccionado(cliente);
+                        setOpenModal(true);
+                    }}>
+                        Editar
+                    </Button>
                     <Button variant="outlined" onClick={() => onEliminar(cliente.id)}>
                         Eliminar</Button>
                 </CardActions>

@@ -1,5 +1,6 @@
 export default interface ICliente {
   id: number;
+  localidadId: number;
   firstname: string;
   lastname: string;
   dni: string;

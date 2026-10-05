@@ -67,7 +67,7 @@ export default function useClientesApi() {
     []
   );
 
-  const crearCliente = useCallback(
+  const nuevoCliente = useCallback(
     async (cliente: Omit<ICliente, "id">): Promise<ICliente | undefined> => {
       setCargando(true);
       setError(null);
@@ -106,10 +106,10 @@ export default function useClientesApi() {
     []
   );
 
-  const actualizarCliente = useCallback(
+  const editarCliente = useCallback(
     async (
       id: number,
-      cliente: Partial<Omit<ICliente, "id">>
+      cliente: Partial<ICliente>
     ): Promise<void> => {
       setCargando(true);
       setError(null);
@@ -185,8 +185,8 @@ export default function useClientesApi() {
     error,
     obtenerClientes,
     obtenerClientePorId,
-    crearCliente,
-    actualizarCliente,
+    nuevoCliente,
+    editarCliente,
     eliminarCliente,
   };
 }
