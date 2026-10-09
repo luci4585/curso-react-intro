@@ -39,6 +39,35 @@ export default function useClientesApi() {
     }
   }, []);
 
+  const obtenerClientesEliminados = useCallback(async (): Promise<
+    ICliente[] | undefined
+  > => {
+    setCargando(true);
+    setError(null);
+
+    try {
+      const respuesta = await fetch(`${URL_BASE}/deleteds`);
+
+      if (!respuesta.ok) {
+        throw new Error("Error al obtener los clientes eliminados");
+      }
+
+      const datos: ICliente[] = await respuesta.json();
+
+      setClientes(datos);
+
+      return datos;
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Ocurrió un error desconocido al obtener los clientes eliminados");
+      }
+    } finally {
+      setCargando(false);
+    }
+  }, []);
+
   const obtenerClientePorId = useCallback(
     async (id: number): Promise<ICliente | undefined> => {
       setCargando(true);
@@ -48,7 +77,7 @@ export default function useClientesApi() {
         const respuesta = await fetch(`${URL_BASE}/${id}`);
 
         if (!respuesta.ok) {
-          throw new Error("Error al obtener el cliente");
+          throw new Error("Error al obtener el cliente eliminado");
         }
 
         const cliente: ICliente = await respuesta.json();
@@ -67,7 +96,7 @@ export default function useClientesApi() {
     []
   );
 
-  const nuevoCliente = useCallback(
+  const agregarCliente = useCallback(
     async (cliente: Omit<ICliente, "id">): Promise<ICliente | undefined> => {
       setCargando(true);
       setError(null);
@@ -175,6 +204,40 @@ export default function useClientesApi() {
     []
   );
 
+  const restaurarCliente = useCallback(
+    async (id: number): Promise<void> => {
+      setCargando(true);
+      setError(null);
+
+      try {
+        const respuesta = await fetch(`${URL_BASE}/restore/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id }),
+        });
+
+        if (!respuesta.ok) {
+          throw new Error("Error al restaurar el cliente");
+        }
+
+        setClientes((clientesActuales) =>
+          clientesActuales.filter((c) => c.id !== id)
+        );
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("Ocurrió un error desconocido al restaurar el cliente");
+        }
+      } finally {
+        setCargando(false);
+      }
+    },
+    []
+  );
+
   useEffect(() => {
     obtenerClientes();
   }, [obtenerClientes]);
@@ -185,8 +248,10 @@ export default function useClientesApi() {
     error,
     obtenerClientes,
     obtenerClientePorId,
-    nuevoCliente,
+    agregarCliente,
     editarCliente,
     eliminarCliente,
+    restaurarCliente,
+    obtenerClientesEliminados,
   };
 }

@@ -6,8 +6,15 @@ import { Button, Card, CardContent, CardActions, CircularProgress } from "@mui/m
 import type ICliente from "../../Interfaces/ICliente";
 
 export default function ClientesList() {
-    const { clientes, agregarCliente, editarCliente, eliminarCliente } = useClientesApi();
+    const { clientes, 
+            restaurarCliente, 
+            agregarCliente, 
+            editarCliente, 
+            eliminarCliente, 
+            obtenerClientes, 
+            obtenerClientesEliminados } = useClientesApi();
     const [openModal, setOpenModal] = useState(false);
+    const [verEliminados, setVerEliminados] = useState(false);
     const [clienteSeleccionado, setClienteSeleccionado] = useState<ICliente | null>(null);
     console.log(clientes);
 
@@ -19,9 +26,11 @@ export default function ClientesList() {
                 {clientes.map((cliente) => (
                     <Cliente key={cliente.id} 
                     cliente={cliente} 
+                    restaurarCliente={restaurarCliente}
                     eliminarCliente={eliminarCliente}
                     setOpenModal={setOpenModal}
-                    setClienteSeleccionado={setClienteSeleccionado} />
+                    setClienteSeleccionado={setClienteSeleccionado}
+                    verEliminados= {verEliminados} />
                 ))}
                 {openModal && (
                     <AgregarEditarCliente>
@@ -35,7 +44,7 @@ export default function ClientesList() {
                           <label htmlFor="dni">DNI:</label>
                           <input type="text" id="dni" name="dni" defaultValue={clienteSeleccionado?.dni ?? ""} />
                           <label htmlFor="address">Dirección:</label>
-                          <input type="text" id="address" name="address" defaultValue={clienteSeleccionado?.adress ?? ""} />
+                          <input type="text" id="address" name="address" defaultValue={clienteSeleccionado?.address ?? ""} />
                         </CardContent>
                         <CardActions sx={{ justifyContent: "center" }}>
                           <Button variant="contained" onClick={async () => {
@@ -43,11 +52,12 @@ export default function ClientesList() {
                               firstname: (document.getElementById("firstname") as HTMLInputElement).value,
                               lastname: (document.getElementById("lastname") as HTMLInputElement).value,
                               dni: (document.getElementById("dni") as HTMLInputElement).value,
-                              adress: (document.getElementById("address") as HTMLInputElement).value,
+                              address: (document.getElementById("address") as HTMLInputElement).value,
                               localidadId: 1,
                             };
                             if (clienteSeleccionado) {
-                              await editarCliente(clienteSeleccionado.id, nuevoCliente);
+                              const clienteEditado = await editarCliente(clienteSeleccionado.id, { ...nuevoCliente, id: clienteSeleccionado.id });
+                              setClienteSeleccionado(null);
                             } else {
                               await agregarCliente(nuevoCliente);
                             }
@@ -64,6 +74,17 @@ export default function ClientesList() {
                     </AgregarEditarCliente>
                 )}
                 <Button variant="contained" onClick={() => setOpenModal(true)}>Agregar Cliente</Button>
+                <Button onClick={async () => {
+                  setVerEliminados(!verEliminados);
+                  if (verEliminados === false) {
+                    await obtenerClientesEliminados();
+                  } 
+                  else {
+                    await obtenerClientes();
+                  }
+                }}>
+                  {verEliminados ? "Ver Clientes Activos" : "Ver Clientes Eliminados"}
+                </Button>
             </ul>
         </div>
     );
