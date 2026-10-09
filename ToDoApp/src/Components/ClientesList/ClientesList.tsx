@@ -1,22 +1,20 @@
-import useClientesApi from "../../Hooks/useClientesApi";
 import AgregarEditarCliente from "../AgregarEditarCliente/AgregarEditarCliente";
 import Cliente from "../Cliente/Cliente";
-import { useState } from "react";
 import { Button, Card, CardContent, CardActions, CircularProgress } from "@mui/material";
-import type ICliente from "../../Interfaces/ICliente";
+import { useClienteContext } from "../ClienteContext/ClienteContext";
 
 export default function ClientesList() {
     const { clientes, 
-            restaurarCliente, 
             agregarCliente, 
-            editarCliente, 
-            eliminarCliente, 
+            editarCliente,
             obtenerClientes, 
-            obtenerClientesEliminados } = useClientesApi();
-    const [openModal, setOpenModal] = useState(false);
-    const [verEliminados, setVerEliminados] = useState(false);
-    const [clienteSeleccionado, setClienteSeleccionado] = useState<ICliente | null>(null);
-    console.log(clientes);
+            obtenerClientesEliminados,
+            setOpenModal,
+            openModal,
+            setVerEliminados,
+            clienteSeleccionado,
+            setClienteSeleccionado,
+            verEliminados, } = useClienteContext();
 
         return (
         <div>
@@ -26,11 +24,7 @@ export default function ClientesList() {
                 {clientes.map((cliente) => (
                     <Cliente key={cliente.id} 
                     cliente={cliente} 
-                    restaurarCliente={restaurarCliente}
-                    eliminarCliente={eliminarCliente}
-                    setOpenModal={setOpenModal}
-                    setClienteSeleccionado={setClienteSeleccionado}
-                    verEliminados= {verEliminados} />
+                    />
                 ))}
                 {openModal && (
                     <AgregarEditarCliente>
@@ -56,7 +50,7 @@ export default function ClientesList() {
                               localidadId: 1,
                             };
                             if (clienteSeleccionado) {
-                              const clienteEditado = await editarCliente(clienteSeleccionado.id, { ...nuevoCliente, id: clienteSeleccionado.id });
+                              await editarCliente(clienteSeleccionado.id, { ...nuevoCliente, id: clienteSeleccionado.id });
                               setClienteSeleccionado(null);
                             } else {
                               await agregarCliente(nuevoCliente);

@@ -7,6 +7,7 @@ import Typography  from "@mui/material/Typography";
 import type ICliente from "../../Interfaces/ICliente";
 import Swal from "sweetalert2";
 import type { SweetAlertOptions } from "sweetalert2";
+import { useClienteContext } from "../ClienteContext/ClienteContext";
 
 const configurarDialogEliminar: SweetAlertOptions = {
     title: '¿Estás seguro?',
@@ -28,17 +29,15 @@ const configurarDialogEliminar: SweetAlertOptions = {
     confirmButtonText: 'Sí, restaurarlo!'
   };
 
-export default function Cliente({ cliente, 
-                                verEliminados, 
-                                eliminarCliente, 
-                                setOpenModal,
-                                restaurarCliente, 
-                                setClienteSeleccionado }: 
-    { cliente: ICliente; eliminarCliente: (id: number) => void; 
-        setOpenModal: (open: boolean) => void;
-        verEliminados: boolean;
-        restaurarCliente: (id: number) => void;
-        setClienteSeleccionado: (cliente: ICliente | null) => void }) {
+export default function Cliente({ cliente }: { cliente: ICliente }) {
+    const {
+        eliminarCliente,
+        restaurarCliente,
+        setOpenModal,
+        setClienteSeleccionado,
+        verEliminados,
+    } = useClienteContext();
+
     const onEliminar = (id: number) => {
         Swal.fire(configurarDialogEliminar).then((result) => {
             if (result.isConfirmed) {
