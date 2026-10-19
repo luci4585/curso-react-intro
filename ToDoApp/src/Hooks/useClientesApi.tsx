@@ -8,8 +8,7 @@ const URL_BASE =
 export default function useClientesApi() {
   const [openModal, setOpenModal] = useState(false);
   const [verEliminados, setVerEliminados] = useState(false);
-  const [clienteSeleccionado, setClienteSeleccionado] =
-    useState<ICliente | null>(null);
+  const [clienteSeleccionado, setClienteSeleccionado] = useState<ICliente | null>(null);
   const [clientes, setClientes] = useState<ICliente[]>([]);
   const [cargando, setCargando] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);

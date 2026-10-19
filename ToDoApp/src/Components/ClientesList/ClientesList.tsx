@@ -19,6 +19,20 @@ export default function ClientesList() {
         return (
         <div>
             <span className="fuente">Lista de Clientes</span>
+            <br />
+                <Button variant="contained" onClick={() => setOpenModal(true)}>Agregar Cliente</Button>
+                <Button onClick={async () => {
+                  setVerEliminados(!verEliminados);
+                  if (verEliminados === false) {
+                    await obtenerClientesEliminados();
+                  } 
+                  else {
+                    await obtenerClientes();
+                  }
+                }}>
+                  {verEliminados ? "Ver Clientes Activos" : "Ver Clientes Eliminados"}
+                </Button>
+
             {clientes.length === 0 && <CircularProgress aria-label='Cargando...' />}
             <ul>
                 {clientes.map((cliente) => (
@@ -67,18 +81,7 @@ export default function ClientesList() {
                       </Card>
                     </AgregarEditarCliente>
                 )}
-                <Button variant="contained" onClick={() => setOpenModal(true)}>Agregar Cliente</Button>
-                <Button onClick={async () => {
-                  setVerEliminados(!verEliminados);
-                  if (verEliminados === false) {
-                    await obtenerClientesEliminados();
-                  } 
-                  else {
-                    await obtenerClientes();
-                  }
-                }}>
-                  {verEliminados ? "Ver Clientes Activos" : "Ver Clientes Eliminados"}
-                </Button>
+
             </ul>
         </div>
     );

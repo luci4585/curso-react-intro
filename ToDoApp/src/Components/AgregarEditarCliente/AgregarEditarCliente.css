@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   z-index: 1300;
-  background-color: rgba(15, 23, 42, 0.58);
+  background-color: rgba(0, 0, 0, 0.963);
   backdrop-filter: blur(3px);
   display: flex;
   justify-content: center;
@@ -13,7 +13,7 @@
 .agregar-editar-cliente > .MuiCard-root {
   width: min(100%, 460px);
   border-radius: 16px;
-  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.25);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.474);
 }
 
 .agregar-editar-cliente .MuiCardContent-root {
@@ -30,7 +30,7 @@
 .agregar-editar-cliente label {
   display: block;
   margin: 14px 0 6px;
-  color: #334155;
+  color: #030303;
   font-size: 0.9rem;
   font-weight: 600;
 }
@@ -41,7 +41,9 @@
   padding: 11px 12px;
   border: 1px solid #cbd5e1;
   border-radius: 8px;
-  color: #1e293b;
+  background-color: #cec9c9;
+  color: #000000;
+  color-scheme: light;
   font: inherit;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -49,7 +51,7 @@
 
 .agregar-editar-cliente input:focus {
   border-color: #1976d2;
-  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+  box-shadow: 0 0 0 3px rgba(113, 112, 112, 0.923);
 }
 
 .agregar-editar-cliente .MuiCardActions-root {
