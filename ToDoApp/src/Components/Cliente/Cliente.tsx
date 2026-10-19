@@ -8,6 +8,7 @@ import type ICliente from "../../Interfaces/ICliente";
 import Swal from "sweetalert2";
 import type { SweetAlertOptions } from "sweetalert2";
 import { useClienteContext } from "../ClienteContext/ClienteContext";
+import { useLocalidadContext } from "../LocalidadContext/LocalidadContext";
 
 const configurarDialogEliminar: SweetAlertOptions = {
     title: '¿Estás seguro?',
@@ -37,6 +38,8 @@ export default function Cliente({ cliente }: { cliente: ICliente }) {
         setClienteSeleccionado,
         verEliminados,
     } = useClienteContext();
+    const { localidades } = useLocalidadContext();
+    const localidad = localidades.find((item) => item.id === cliente.localidadId);
 
     const onEliminar = (id: number) => {
         Swal.fire(configurarDialogEliminar).then((result) => {
@@ -57,6 +60,7 @@ export default function Cliente({ cliente }: { cliente: ICliente }) {
                 <CardContent>
                     <p>DNI: {cliente.dni} </p>
                     <p>Dirección: {cliente.address}</p>
+                    <p>Localidad: {localidad?.name ?? "Localidad no disponible"}</p>
                 </CardContent>
 
                 <CardActions sx={{ justifyContent: "center" }}>

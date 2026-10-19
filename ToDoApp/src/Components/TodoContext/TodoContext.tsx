@@ -1,6 +1,4 @@
 import React from "react";
-import TodoCounter from "../TodoCounter/TodoCounter";
-
 
 export type Todo = {
     texto: string;
