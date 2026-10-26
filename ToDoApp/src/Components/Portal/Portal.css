@@ -1,4 +1,5 @@
-.agregar-editar-cliente {
+.portal
+ {
   position: fixed;
   inset: 0;
   z-index: 1300;
@@ -10,24 +11,24 @@
   padding: 24px;
 }
 
-.agregar-editar-cliente > .MuiCard-root {
+.portal > .MuiCard-root {
   width: min(100%, 460px);
   border-radius: 16px;
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.474);
 }
 
-.agregar-editar-cliente .MuiCardContent-root {
+.portal .MuiCardContent-root {
   padding: 28px 32px 12px;
 }
 
-.agregar-editar-cliente h2 {
+.portal h2 {
   margin: 0 0 24px;
   color: #1e293b;
   font-size: 1.5rem;
   text-align: center;
 }
 
-.agregar-editar-cliente label {
+.portal label {
   display: block;
   margin: 14px 0 6px;
   color: #030303;
@@ -35,7 +36,7 @@
   font-weight: 600;
 }
 
-.agregar-editar-cliente input {
+.portal input {
   box-sizing: border-box;
   width: 100%;
   padding: 11px 12px;
@@ -49,12 +50,12 @@
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.agregar-editar-cliente input:focus {
+.portal input:focus {
   border-color: #1976d2;
   box-shadow: 0 0 0 3px rgba(113, 112, 112, 0.923);
 }
 
-.agregar-editar-cliente .MuiCardActions-root {
+.portal .MuiCardActions-root {
   gap: 12px;
   padding: 16px 32px 28px;
 }

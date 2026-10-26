@@ -1,16 +1,16 @@
 import ReactDOM from 'react-dom';
-import './AgregarEditarCliente.css';
+import './Portal.css';
 
 
 export default function AgregarEditarCliente({ children }: { children: React.ReactNode }) {
-  const portalNode = document.getElementById('agregar-editar-cliente');
+  const portalNode = document.getElementById('portal');
 
   if (!portalNode) {
     return null;
   }
 
   return ReactDOM.createPortal(
-    <div className="agregar-editar-cliente">{children}</div>,
+    <div className="portal">{children}</div>,
     portalNode
   );
 }

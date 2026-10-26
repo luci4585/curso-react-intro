@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button, Card, CardActions, CardContent, CircularProgress } from "@mui/material";
-import AgregarEditarCliente from "../AgregarEditarCliente/AgregarEditarCliente";
+import AgregarEditarCliente from "../Portal/Portal";
 import Localidad from "./Localidad";
 import { useLocalidadContext } from "../LocalidadContext/LocalidadContext";
 
-export default function LocalidadesList() {
+export default function LocalidadesList({ onVolverClientes }: { onVolverClientes?: () => void }) {
   const {
     localidades,
     agregarLocalidad,
@@ -39,7 +39,12 @@ export default function LocalidadesList() {
   };
 
   return (
-    <section>
+    <section id="localidades-section">
+      {onVolverClientes && (
+        <Button variant="outlined" onClick={onVolverClientes}>
+          Volver a la lista de clientes
+        </Button>
+      )}
       <h2>Lista de Localidades</h2>
       <Button variant="contained" onClick={abrirAgregar}>Agregar Localidad</Button>
       <Button onClick={async () => {
