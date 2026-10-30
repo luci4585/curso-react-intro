@@ -8,4 +8,13 @@ export default defineConfig({
     react(),
     babel({ presets: [reactCompilerPreset()] })
   ],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://api-inventario-ale-fcdhb0brcahmb4dy.westus3-01.azurewebsites.net',
+        changeOrigin: true,
+        secure: true,
+      },
+    },
+  },
 })

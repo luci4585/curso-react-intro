@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import type ILocalidad from "../Interfaces/ILocalidad";
 
 const URL_BASE =
-  "https://api-inventario-ale-fcdhb0brcahmb4dy.westus3-01.azurewebsites.net/api/Localidades";
+  "/api/Localidades";
 
 export default function useLocalidadesApi() {
   const [openModal, setOpenModal] = useState(false);

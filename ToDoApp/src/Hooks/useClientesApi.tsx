@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import type ICliente from "../Interfaces/ICliente";
 
 const URL_BASE =
-  "https://api-inventario-ale-fcdhb0brcahmb4dy.westus3-01.azurewebsites.net/api/Clientes";
+  "/api/Clientes";
 
 
 export default function useClientesApi() {
