@@ -40,7 +40,8 @@ export default function ClientesList() {
         <div>
             {!mostrarSoloLocalidades && (
               <div id="clientes-section">
-                <span className="fuente">Lista de Clientes</span>
+                <h1>Desarrollo Luci</h1>
+                <span className="fuente">Lista de Clientes - Luci</span>
                 <br />
                     <Button variant="contained" onClick={() => setOpenModal(true)}>Agregar Cliente</Button>
                     <Button onClick={async () => {
